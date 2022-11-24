@@ -1,14 +1,19 @@
-import { React } from "react";
+
 import {
   PopUpContainer,
   PopUpFormContainer,
   FormTitle,
   SendInviteBtn,
   CloseFormBtn,
-  FormContainer,
-} from "./popUpStyles";
+  FormContainer}
+from "./popUpStyles";
 
-export const Form = ({ setModalIsOpen }) => {
+interface ISetModalOpen {
+  setModalIsOpen: (value: boolean) => void;
+}
+
+const Form = ({setModalIsOpen}:ISetModalOpen ) => {
+  console.log("Form");
   return (
     <PopUpContainer>
       <CloseFormBtn onClick={() => setModalIsOpen(false)}>x</CloseFormBtn>
@@ -50,4 +55,6 @@ export const Form = ({ setModalIsOpen }) => {
     </PopUpContainer>
   );
 };
+
+
 export default Form;
