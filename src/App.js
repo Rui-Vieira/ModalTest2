@@ -1,16 +1,14 @@
 import React from 'react';
-import PopUpForm from './container/popUpForm/PopUpForm';
+import { ItemDetailModal } from './container/popUpForm/itemDetailModal';
 
 
 export default function App() {
     console.log('App');
     
     return (
-       <>
-    
-        <PopUpForm/>
-       </>
-
+        <>
+        <ItemDetailModal/>
+        </>
     )
 }
 
