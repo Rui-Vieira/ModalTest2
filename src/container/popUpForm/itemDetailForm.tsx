@@ -1,21 +1,70 @@
-
+import { useState,useEffect,useRef } from "react";
 import {
   PopUpContainer,
   PopUpFormContainer,
   FormTitle,
   SendInviteBtn,
   CloseFormBtn,
-  FormContainer}
-from "./popUpStyles";
+  FormContainer
+}
+  from "./popUpStyles";
+import { LoadingSpinner, LoadingComp, ErrorText} from "./loadingSpinnerStyle"
 
 interface ISetModalOpen {
   setModalIsOpen: (value: boolean) => void;
+  modalIsOpen: boolean;
 }
 
-const Form = ({setModalIsOpen}:ISetModalOpen ) => {
-  console.log("Form");
+export const ItemDetailForm = ({ modalIsOpen,setModalIsOpen}: ISetModalOpen) => {
+
+  
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const wrapperRef = useRef(null);
+
+  const handleFetch = () => {
+    setIsLoading(!isLoading);
+
+    async function fetchData() {
+      const response = await fetch(`http://www.girassol.com/`); //url will be changed
+
+      return response;
+
+    }
+
+    fetchData()
+      .then((response) => response.json())
+      .then((_response) => {
+        setIsLoading(!isLoading);
+      })
+      .catch(() => {
+        setErrorMessage("Unable to send invite request");
+        setIsLoading(false);
+      });
+  };
+
+    //DETECT MOUSE CLICKS OUTSIDE
+    const useOutsideAlerter = (ref:any) => {
+      useEffect(() => {
+        //CLICKED OUTSIDE OF ELEMENT
+        const handler = (event:any) => {
+          if (modalIsOpen && ref.current && !ref.current.contains(event.target)) {
+            setModalIsOpen(false);
+          }
+        };
+        //BINDE EVENT LISTENER
+        document.addEventListener("mousedown", handler);
+        return () => {
+          // UNBIND EVENT LISTENER ON CLEANUP
+          document.removeEventListener("mousedown", handler);
+        };
+      }, [ref]);
+    };
+
+useOutsideAlerter(wrapperRef);
+
   return (
-    <PopUpContainer>
+    <PopUpContainer ref={wrapperRef}>
       <CloseFormBtn onClick={() => setModalIsOpen(false)}>x</CloseFormBtn>
 
       <PopUpFormContainer>
@@ -37,24 +86,37 @@ const Form = ({setModalIsOpen}:ISetModalOpen ) => {
             </div>
           </div>
 
-          <div className="form-group">
+          <div className="form-group " >
             <label htmlFor="email">Email</label>
-            <input
+            <div className="form-control">
+              <input
               type="email"
-              className="form-control"
+              className="form-group-email"
               id="email"
               placeholder="joe.doe@minka.cloud"
-            />
+              />
+            </div>
           </div>
         </FormContainer>
 
+        <LoadingComp>
+          {isLoading ? <LoadingSpinner /> : <p></p>}
+          {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
+          <SendInviteBtn onClick={handleFetch} disabled={isLoading}>
+            Invite
+          </SendInviteBtn>
+        </LoadingComp>
+
+      {/*}
         <SendInviteBtn onClick={() => setModalIsOpen(false)}>
           Invite
         </SendInviteBtn>
+      */}
+
       </PopUpFormContainer>
     </PopUpContainer>
   );
 };
 
+export default ItemDetailForm;
 
-export default Form;

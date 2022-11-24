@@ -15,19 +15,39 @@ export const PopUpContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
+  
+  
 `;
 
 export const PopUpFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  
+  
 `;
 
 export const FormContainer = styled.form`
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+
   .form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
     margin-bottom: 14px;
     font-size: 14px;
     font-weight: 500;
+    width: 80%;
 
     label {
       display: block;
@@ -35,7 +55,7 @@ export const FormContainer = styled.form`
       margin-bottom: 10px;
     }
     .form-control {
-      width: 100%;
+      width: 99%;
       height: 50px;
       border: 2px solid #ddd;
       border-radius: 5px;
@@ -50,8 +70,7 @@ export const FormContainer = styled.form`
       height: 50px;
       border: none;
       background-color: #fff;
-      padding: 10px;
-      border: 1px solid #ddd;
+      padding: 0.4rem;
       border-radius: 5px;
       color: #333;
 
@@ -59,6 +78,23 @@ export const FormContainer = styled.form`
         outline: none;
         border-color: #42bb98;
         }
+    }
+    
+    .form-group-email{
+      width: 98%;
+      height: 48px;
+      border: none;
+      border-radius: 5px;
+      padding-left: 0.4rem;
+      color: #333;
+
+      &:focus {
+        outline: none;
+        border-color: #42bb98;
+      }
+
+      @media (max-width: 768px) {
+       width: 10%;
     }
 `;
 
@@ -122,3 +158,10 @@ export const OpenFormBtn = styled(SendInviteBtn)`
   width: 10%;
   font-size: 14px;
 `;
+
+/*export const BlurTest = styled("div")<{active:boolean}>`
+
+filter: ${(props) => (props.active ? "blur(0px)" : "blur(8px)")};
+
+<BlurTest active={true}>
+`*/
