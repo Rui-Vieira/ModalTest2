@@ -16,6 +16,13 @@ export const PopUpContainer = styled.div`
   transform: translate(-50%, -50%);
   z-index: 1000;
   
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  
   
 `;
 
@@ -24,10 +31,35 @@ export const PopUpFormContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 80%;
   height: auto;
-  
-  
+
+  h3{
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  }
+
+  p{
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #5C6670;
+    
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  @media (max-width: 768px) {
+    p{
+      display: none;
+    }
 `;
 
 export const FormContainer = styled.form`
@@ -38,6 +70,8 @@ export const FormContainer = styled.form`
   align-items: center;
   width: 100%;
   height: auto;
+  color: #304050;
+  
 
   .form-group {
     display: flex;
@@ -45,13 +79,13 @@ export const FormContainer = styled.form`
     justify-content: center;
     align-items: flex-start;
     margin-bottom: 14px;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 150%;
     width: 80%;
 
     label {
       display: block;
-      font-size: 18px;
+      font-size: 1 rem;
       margin-bottom: 10px;
     }
     .form-control {
@@ -72,7 +106,7 @@ export const FormContainer = styled.form`
       background-color: #fff;
       padding: 0.4rem;
       border-radius: 5px;
-      color: #333;
+      color: #AEB3B7;
 
       &:focus {
         outline: none;
@@ -81,16 +115,21 @@ export const FormContainer = styled.form`
     }
     
     .form-group-email{
-      width: 98%;
+      width: 97%;
       height: 48px;
       border: none;
       border-radius: 5px;
       padding-left: 0.4rem;
-      color: #333;
+      
+    
 
       &:focus {
         outline: none;
         border-color: #42bb98;
+      }
+
+      input {
+        color: #AEB3B7;
       }
 
       @media (max-width: 768px) {
@@ -105,6 +144,8 @@ export const FormTitle = styled.div`
   text-align: flex-start;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   margin-bottom: 1rem;
+  width: 100%;
+  height: auto;
 
   h3 {
     font-size: 20px;
@@ -119,6 +160,15 @@ export const FormTitle = styled.div`
     margin-bottom: 0.4rem;
   }
 `;
+
+export const LoadingReservedSpace = styled.div`
+width: 50px;
+height: 50px;
+
+`;
+
+   
+
 
 //-------------Buttons--------------------
 
@@ -136,7 +186,7 @@ export const CloseFormBtn = styled.button`
 `;
 
 export const SendInviteBtn = styled.button`
-  width: 100%;
+  width: 80%;
   background: #2ca07e;
   border-radius: 4px;
   border: none;

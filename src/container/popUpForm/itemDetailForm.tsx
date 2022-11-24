@@ -1,23 +1,24 @@
-import { useState,useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   PopUpContainer,
   PopUpFormContainer,
   FormTitle,
   SendInviteBtn,
   CloseFormBtn,
-  FormContainer
+  FormContainer,
+  LoadingReservedSpace
 }
   from "./popUpStyles";
-import { LoadingSpinner, LoadingComp, ErrorText} from "./loadingSpinnerStyle"
+import { LoadingSpinner, LoadingComp, ErrorText } from "./loadingSpinnerStyle"
 
 interface ISetModalOpen {
   setModalIsOpen: (value: boolean) => void;
   modalIsOpen: boolean;
 }
 
-export const ItemDetailForm = ({ modalIsOpen,setModalIsOpen}: ISetModalOpen) => {
+export const ItemDetailForm = ({ modalIsOpen, setModalIsOpen }: ISetModalOpen) => {
 
-  
+
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const wrapperRef = useRef(null);
@@ -43,37 +44,39 @@ export const ItemDetailForm = ({ modalIsOpen,setModalIsOpen}: ISetModalOpen) => 
       });
   };
 
-    //DETECT MOUSE CLICKS OUTSIDE
-    const useOutsideAlerter = (ref:any) => {
-      useEffect(() => {
-        //CLICKED OUTSIDE OF ELEMENT
-        const handler = (event:any) => {
-          if (modalIsOpen && ref.current && !ref.current.contains(event.target)) {
-            setModalIsOpen(false);
-          }
-        };
-        //BINDE EVENT LISTENER
-        document.addEventListener("mousedown", handler);
-        return () => {
-          // UNBIND EVENT LISTENER ON CLEANUP
-          document.removeEventListener("mousedown", handler);
-        };
-      }, [ref]);
-    };
+  //DETECT MOUSE CLICKS OUTSIDE
+  const useOutsideAlerter = (ref: any) => {
+    useEffect(() => {
+      //CLICKED OUTSIDE OF ELEMENT
+      const handler = (event: any) => {
+        if (modalIsOpen && ref.current && !ref.current.contains(event.target)) {
+          setModalIsOpen(false);
+        }
+      };
+      //BINDE EVENT LISTENER
+      document.addEventListener("mousedown", handler);
+      return () => {
+        // UNBIND EVENT LISTENER ON CLEANUP
+        document.removeEventListener("mousedown", handler);
+      };
+    }, [ref]);
+  };
 
-useOutsideAlerter(wrapperRef);
+  useOutsideAlerter(wrapperRef);
 
   return (
     <PopUpContainer ref={wrapperRef}>
       <CloseFormBtn onClick={() => setModalIsOpen(false)}>x</CloseFormBtn>
 
       <PopUpFormContainer>
+        <div>
         <FormTitle className="form-title">
-          <h3>Send invite</h3>
+          <h3>Send Invite</h3>
           <p>
             Send an invitation for an external user to use your internal shop
           </p>
         </FormTitle>
+        </div>
 
         <FormContainer>
           <div className="form-group">
@@ -90,24 +93,24 @@ useOutsideAlerter(wrapperRef);
             <label htmlFor="email">Email</label>
             <div className="form-control">
               <input
-              type="email"
-              className="form-group-email"
-              id="email"
-              placeholder="joe.doe@minka.cloud"
+                type="email"
+                className="form-group-email"
+                id="email"
+                placeholder="joe.doe@minka.cloud"
               />
             </div>
           </div>
         </FormContainer>
 
         <LoadingComp>
-          {isLoading ? <LoadingSpinner /> : <p></p>}
+          {isLoading ? <LoadingSpinner /> : <LoadingReservedSpace />}
           {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
-          <SendInviteBtn onClick={handleFetch} disabled={isLoading}>
+        </LoadingComp>
+        <SendInviteBtn onClick={handleFetch} disabled={isLoading}>
             Invite
           </SendInviteBtn>
-        </LoadingComp>
 
-      {/*}
+        {/*}
         <SendInviteBtn onClick={() => setModalIsOpen(false)}>
           Invite
         </SendInviteBtn>
