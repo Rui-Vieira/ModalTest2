@@ -12,8 +12,8 @@ const spinner = keyframes`
 
 
 export const LoadingSpinner = styled.div`
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     border: 10px solid #f3f3f3; 
     border-top: 10px solid #383636; 
     border-radius: 50%;
@@ -33,11 +33,14 @@ export const LoadingComp= styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 80%;
+    height: 60%;
+    
 `;
 
 export const ErrorText = styled.p`
     color: red;
-    
+    text-decoration: underline;
   `;
 
 /**
