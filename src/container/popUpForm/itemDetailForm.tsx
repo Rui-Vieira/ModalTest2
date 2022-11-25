@@ -6,18 +6,20 @@ import {
   SendInviteBtn,
   CloseFormBtn,
   FormContainer,
-  LoadingReservedSpace
-}
-  from "./popUpStyles";
-import { LoadingSpinner, LoadingComp, ErrorText } from "./loadingSpinnerStyle"
+  LoadingReservedSpace,
+} from "./popUpStyles";
+
+import { LoadingSpinner, LoadingComp, ErrorText } from "./loadingSpinnerStyle";
 
 interface ISetModalOpen {
   setModalIsOpen: (value: boolean) => void;
   modalIsOpen: boolean;
 }
 
-export const ItemDetailForm = ({ modalIsOpen, setModalIsOpen }: ISetModalOpen) => {
-
+export const ItemDetailForm = ({
+  modalIsOpen,
+  setModalIsOpen,
+}: ISetModalOpen) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -30,7 +32,6 @@ export const ItemDetailForm = ({ modalIsOpen, setModalIsOpen }: ISetModalOpen) =
       const response = await fetch(`http://www.girassol.com/`); //url will be changed
 
       return response;
-
     }
 
     fetchData()
@@ -44,19 +45,15 @@ export const ItemDetailForm = ({ modalIsOpen, setModalIsOpen }: ISetModalOpen) =
       });
   };
 
-  //DETECT MOUSE CLICKS OUTSIDE
   const useOutsideAlerter = (ref: any) => {
     useEffect(() => {
-      //CLICKED OUTSIDE OF ELEMENT
       const handler = (event: any) => {
         if (modalIsOpen && ref.current && !ref.current.contains(event.target)) {
           setModalIsOpen(false);
         }
       };
-      //BINDE EVENT LISTENER
       document.addEventListener("mousedown", handler);
       return () => {
-        // UNBIND EVENT LISTENER ON CLEANUP
         document.removeEventListener("mousedown", handler);
       };
     }, [ref]);
@@ -66,16 +63,16 @@ export const ItemDetailForm = ({ modalIsOpen, setModalIsOpen }: ISetModalOpen) =
 
   return (
     <PopUpContainer ref={wrapperRef}>
-      <CloseFormBtn onClick={() => setModalIsOpen(false)}>x</CloseFormBtn>
+      <CloseFormBtn onClick={() => setModalIsOpen(false)}> x </CloseFormBtn>
 
       <PopUpFormContainer>
         <div>
-        <FormTitle className="form-title">
-          <h3>Send Invite</h3>
-          <p>
-            Send an invitation for an external user to use your internal shop
-          </p>
-        </FormTitle>
+          <FormTitle className="form-title">
+            <h3>Send Invite</h3>
+            <p>
+              Send an invitation for an external user to use your internal shop
+            </p>
+          </FormTitle>
         </div>
 
         <FormContainer>
@@ -89,7 +86,7 @@ export const ItemDetailForm = ({ modalIsOpen, setModalIsOpen }: ISetModalOpen) =
             </div>
           </div>
 
-          <div className="form-group " >
+          <div className="form-group ">
             <label htmlFor="email">Email</label>
             <div className="form-control">
               <input
@@ -107,19 +104,17 @@ export const ItemDetailForm = ({ modalIsOpen, setModalIsOpen }: ISetModalOpen) =
           {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
         </LoadingComp>
         <SendInviteBtn onClick={handleFetch} disabled={isLoading}>
-            Invite
-          </SendInviteBtn>
+          Invite
+        </SendInviteBtn>
 
         {/*}
         <SendInviteBtn onClick={() => setModalIsOpen(false)}>
           Invite
         </SendInviteBtn>
       */}
-
       </PopUpFormContainer>
     </PopUpContainer>
   );
 };
 
 export default ItemDetailForm;
-
