@@ -1,6 +1,6 @@
 
 import {
-    PopUpFormContainer,
+    InviteMessageContainer,
     FormTitle,
     SendInviteBtn,
 } from "./popUpStyles";
@@ -18,23 +18,20 @@ export const InviteMessageComponent= ({ setModalIsOpen, text, setInviteSent }: I
         setModalIsOpen(false);
         setInviteSent(false);
     }
-
+        
     return (
     
-            <PopUpFormContainer>
-                <FormTitle className="form-title">
+            <InviteMessageContainer> 
 
-                    <p>
-                        {text}
-                    </p>
+                <FormTitle className="message-area">
+                    <p> {text} </p>
                 </FormTitle>
 
-                <SendInviteBtn onClick={handleClick} >
+                <SendInviteBtn className="button-area" onClick={handleClick} >
                     Close
                 </SendInviteBtn>
-                </PopUpFormContainer>
+            </InviteMessageContainer>
     );
 };
 
 export default InviteMessageComponent;
-

@@ -1,109 +1,191 @@
 import styled from "styled-components";
 
 export const PopUpContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 35%;
-  height: 60%;
-  background-color: #fff;
-  padding: 20 px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-  
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.01em;
-  
-  
+
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+width: 35%;
+height: 60%;
+background-color: #fff;
+box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+z-index: 1000;
+
+font-family: 'Inter', sans-serif;
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+letter-spacing: 0.01em;
+
 `;
+
 
 export const PopUpFormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+
+
+  display: grid; 
+  grid-auto-columns: 1fr; 
+  grid-template-columns: 0.2fr 1.8fr 0.2fr; 
+  grid-template-rows: 0.3fr 1fr 2fr 1fr 0.2fr;
+  grid-template-areas: 
+
+    ".           .           ."
+    ".     title-area        ."
+    ".      form-area        ."
+    ".   button-invite-area ."
+    ".           .           ."; 
+
+}
+
+
+.title-area {
+
+  display: grid; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: 1fr 1fr; 
+  
+  grid-area: title-area; 
+  grid-template-areas: 
+    "title-area-text"
+    "title-area-phrase"; 
+  
+}
+
+
+.form-area {
+
+    display: grid; 
+    grid-template-columns: 1fr; 
+    grid-template-rows: 1fr 1fr; 
+    grid-area: form-area;
+    grid-template-areas: 
+      "form-profile-area"
+      "form-email-area"; 
+
+}
+
+
+.form-profile-area {
+    width: 100%;
+    display: grid; 
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "form-profile-title-area"
+      "form-profile-selector-area";
+
+    grid-row-gap: 1rem;    
+    }
+
+
+     
+form-email-area {
+    width: 100%;
+    display: grid; 
+    grid-auto-columns: 1fr; 
+    grid-template-rows: 1fr 1fr; 
+    grid-template-areas:
+      "form-email-title-area"
+      "form-email-input-area";
+    
+    grid-row-gap: 0.5 rem;
+  }
+  
+  .form-email-input-area {
+    width: calc(100%);
+  }
+
+.button-invite-area {
+
   justify-content: center;
   align-items: center;
-  width: 80%;
-  height: auto;
+  background: white;
+  grid-area: button-invite-area;
+  width: 100%;
+}
 
-  h3{
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.01em;
-  }
-
-  p{
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    color: #5C6670;
-    
-  div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-  }
-
-  @media (max-width: 768px) {
-    p{
-      display: none;
-    }
 `;
 
-export const FormContainer = styled.form`
 
+export const InviteMessageContainer = styled.div`
+  
+    display: grid; 
+    grid-auto-columns: 1fr; 
+    grid-auto-rows: 1fr; 
+    grid-template-columns: .2fr 1.8fr 0.2fr; 
+    grid-template-rows: 0.2fr 0.4fr 1fr 1fr 0.2fr; 
+    
+    width: 100%;
+    height: 100%;
+
+    gap: 0% 0px; 
+    grid-template-areas: 
+      ". . ."
+      ". title-area ."
+      ". message-area ."
+      ". button-area ."
+      ". . ."; 
+    }
+
+    .title-area {
+      
+    justify-self: center; 
+    align-self: start; 
+    grid-area: title-area; 
+    }
+
+    .message-area {
+    justify-self: center; 
+    align-self: center; 
+    grid-area:message-area; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    }
+
+    .button-area {
+    justify-self: center; 
+    align-self: end; 
+    grid-area: button-area; 
+    }
+            
+`;
+export const FormContainer = styled.form`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
   height: auto;
   color: #304050;
-  
 
-  .form-group {
+
+  #form-group {
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    margin-bottom: 14px;
-    font-size: 1.25rem;
-    line-height: 150%;
-    width: 80%;
-
-    label {
-      display: block;
-      font-size: 1 rem;
-      margin-bottom: 10px;
-    }
-    .form-control {
-      width: 99%;
-      height: 50px;
-      border: 2px solid #ddd;
-      border-radius: 5px;
-      color: #333;
-      &:focus {
-        outline: none;
-        border-color: #42bb98;
+    font-size: 1rem;
+    width: 100%;
+    &:focus {
+      outline: none;
+      border-color: #42bb98;
       }
-    }
+      
     select {
       width: 100%;
-      height: 50px;
+      height: 3.125rem;
       border: none;
       background-color: #fff;
+      border: 2px solid #ddd;
       padding: 0.4rem;
       border-radius: 5px;
       color: #AEB3B7;
@@ -115,46 +197,39 @@ export const FormContainer = styled.form`
     }
     
     .form-group-email{
-      width: 97%;
-      height: 48px;
-      border: none;
+      width: 96% ;
+      height: 2.125rem;
       border-radius: 5px;
-      padding-left: 0.4rem;
-      
-    
-
+      border: 2px solid #ddd;
+      padding: 0.4rem;
+  
       &:focus {
         outline: none;
         border-color: #42bb98;
       }
-
+      
       input {
         color: #AEB3B7;
       }
-
-      @media (max-width: 768px) {
-       width: 10%;
-    }
+  } 
 `;
 
 export const FormTitle = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  text-align: flex-start;
+
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   margin-bottom: 1rem;
   width: 100%;
   height: auto;
 
   h3 {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 700;
     margin-bottom: 0.2rem;
   }
 
   p {
-    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: 400;
     color: #5c6670;
     margin-top: 0rem;
     margin-bottom: 0.4rem;
@@ -167,7 +242,6 @@ height: 50px;
 
 `;
 
-   
 
 
 //-------------Buttons--------------------
@@ -186,7 +260,8 @@ export const CloseFormBtn = styled.button`
 `;
 
 export const SendInviteBtn = styled.button`
-  width: 80%;
+  width: 100%;
+
   background: #2ca07e;
   border-radius: 4px;
   border: none;

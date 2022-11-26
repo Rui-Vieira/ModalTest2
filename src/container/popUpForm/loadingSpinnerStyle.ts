@@ -31,10 +31,10 @@ export const SpinnerContainer = styled.div`
 export const LoadingComp= styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
-    width: 80%;
-    height: 60%;
+    width: 100%;
+    height: 100%;
     
 `;
 
