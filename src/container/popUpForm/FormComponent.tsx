@@ -48,7 +48,7 @@ const FormComponent = ({isLoading, handleFetch} : FormComponentProps) => {
 
                 <LoadingComp>
                     {isLoading ? <LoadingSpinner /> : <LoadingReservedSpace />}
-                    {/* {errorMessage && <ErrorText>{errorMessage}</ErrorText>} */}
+   
                 </LoadingComp>
                 <SendInviteBtn onClick={handleFetch} disabled={isLoading} hidden={isLoading}>
                     Invite

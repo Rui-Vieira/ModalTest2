@@ -19,9 +19,11 @@ export const InviteMessageComponent= ({ setModalIsOpen, text, setInviteSent }: I
         setInviteSent(false);
     }
 
+            // TODO mudar o nome do form  e estelizar 
+            
     return (
     
-            <PopUpFormContainer>
+            <PopUpFormContainer> 
                 <FormTitle className="form-title">
 
                     <p>
