@@ -1,55 +1,73 @@
 import { useState, useEffect, useRef } from "react";
 import {
   PopUpContainer,
-  PopUpFormContainer,
-  FormTitle,
-  SendInviteBtn,
   CloseFormBtn,
-  FormContainer,
-  LoadingReservedSpace,
 } from "./popUpStyles";
-
 import { LoadingSpinner, LoadingComp, ErrorText } from "./loadingSpinnerStyle";
+import FormComponent from "./FormComponent";
+import InviteMessageComponent from "./inviteMessageComponent";
 
 interface ISetModalOpen {
-  setModalIsOpen: (value: boolean) => void;
+  setModalIsOpen: any;
   modalIsOpen: boolean;
+  setIsLoaded: any;
+  setIsActive: any;
+  inviteSent: boolean;
+  setInviteSent: any;
 }
 
-export const ItemDetailForm = ({
-  modalIsOpen,
-  setModalIsOpen,
-}: ISetModalOpen) => {
+export const ItemDetailForm = ({ setIsLoaded, modalIsOpen, setModalIsOpen, inviteSent, setInviteSent }: ISetModalOpen) => {
 
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState(""); add if need it
   const wrapperRef = useRef(null);
+  const [fetchMessage, setFetchMessage] = useState("Example")
+
+  /*
+  const handleFetch = () => {
+      setIsLoading(!isLoading);
+  
+       async function fetchData() {
+         const response = await fetch(`https://hn.algolia.com/api/v1/items/1`); //url will be changed
+  
+         return response;
+       }
+      
+       fetchData()
+         .then((response) => response.json())
+         .then((_response) => {
+           setIsLoading(!isLoading);
+         })
+         .catch(() => {
+           setErrorMessage("Unable to send invite request");
+           setIsLoading(false);
+         });
+     };
+     */
 
   const handleFetch = () => {
     setIsLoading(!isLoading);
+    // isLoading pass to is Invite , postRequest, verify the response code , if 200 modal message of sucess apears 
 
-    async function fetchData() {
-      const response = await fetch(`http://www.girassol.com/`); //url will be changed
 
-      return response;
+    async function fetchNews() {
+      const response = await fetch(`https://hn.algolia.com/api/v1/items/1`); //url will be changed
+      const json = await response.json();
+      setIsLoading(false);
+      setIsLoaded(true);
+      setInviteSent(true);
+      return json;
     }
-
-    fetchData()
-      .then((response) => response.json())
-      .then((_response) => {
-        setIsLoading(!isLoading);
-      })
-      .catch(() => {
-        setErrorMessage("Unable to send invite request");
-        setIsLoading(false);
-      });
+    fetchNews();
   };
+
 
   const useOutsideAlerter = (ref: any) => {
     useEffect(() => {
       const handler = (event: any) => {
         if (modalIsOpen && ref.current && !ref.current.contains(event.target)) {
           setModalIsOpen(false);
+          setInviteSent(false);
         }
       };
       document.addEventListener("mousedown", handler);
@@ -59,60 +77,20 @@ export const ItemDetailForm = ({
     }, [ref]);
   };
 
+  const handleClick = () => {
+    setModalIsOpen(false);
+    setInviteSent(false);
+  }
+
   useOutsideAlerter(wrapperRef);
+  console.log(inviteSent)
 
   return (
     <PopUpContainer ref={wrapperRef}>
-      <CloseFormBtn onClick={() => setModalIsOpen(false)}> x </CloseFormBtn>
+      <CloseFormBtn onClick={handleClick}> x </CloseFormBtn>
 
-      <PopUpFormContainer>
-        <div>
-          <FormTitle className="form-title">
-            <h3>Send Invite</h3>
-            <p>
-              Send an invitation for an external user to use your internal shop
-            </p>
-          </FormTitle>
-        </div>
-
-        <FormContainer>
-          <div className="form-group">
-            <label htmlFor="profileLabel"> Profile </label>
-            <div className="form-control">
-              <select name="profile" id="profile">
-                <option value="frontend">Developer front-end</option>
-                <option value="backend">Developer back-end</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="form-group ">
-            <label htmlFor="email">Email</label>
-            <div className="form-control">
-              <input
-                type="email"
-                className="form-group-email"
-                id="email"
-                placeholder="joe.doe@minka.cloud"
-              />
-            </div>
-          </div>
-        </FormContainer>
-
-        <LoadingComp>
-          {isLoading ? <LoadingSpinner /> : <LoadingReservedSpace />}
-          {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
-        </LoadingComp>
-        <SendInviteBtn onClick={handleFetch} disabled={isLoading}>
-          Invite
-        </SendInviteBtn>
-
-        {/*}
-        <SendInviteBtn onClick={() => setModalIsOpen(false)}>
-          Invite
-        </SendInviteBtn>
-      */}
-      </PopUpFormContainer>
+      {/* ternario */}
+      {inviteSent ? <InviteMessageComponent text={fetchMessage} setModalIsOpen={setModalIsOpen} setInviteSent={setInviteSent} /> : <FormComponent isLoading={isLoading} handleFetch={handleFetch} />}
     </PopUpContainer>
   );
 };
