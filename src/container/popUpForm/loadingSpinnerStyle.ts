@@ -15,7 +15,7 @@ export const LoadingSpinner = styled.div`
     width: 30px;
     height: 30px;
     border: 10px solid #f3f3f3; 
-    border-top: 10px solid #42bb98 ; //*#383636*
+    border-top: 10px solid #42bb98 ; 
     border-radius: 50%;
     animation: ${spinner} 1.5s linear infinite;
 `;

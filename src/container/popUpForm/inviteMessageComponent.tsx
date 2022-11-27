@@ -11,7 +11,7 @@ interface InviteMessageComponentProps {
     setInviteSent: any;
 }
 
-export const InviteMessageComponent= ({ setModalIsOpen, text, setInviteSent }: InviteMessageComponentProps) => {
+export const InviteMessageComponent= ({ setModalIsOpen, setInviteSent }: InviteMessageComponentProps) => { //receive text props with backend response
 
     const handleClick = () => {
 
@@ -24,7 +24,8 @@ export const InviteMessageComponent= ({ setModalIsOpen, text, setInviteSent }: I
             <InviteMessageContainer> 
 
                 <FormTitle className="message-area">
-                    <p> {text} </p>
+                    {/* <p> {text} </p> */}
+                    <p>Your invitation has been sent</p>
                 </FormTitle>
 
                 <SendInviteBtn className="button-area" onClick={handleClick} >

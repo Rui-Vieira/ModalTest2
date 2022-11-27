@@ -41,7 +41,7 @@ export const PopUpFormContainer = styled.div`
     ".   button-invite-area ."
     ".           .           ."; 
 
-}
+
 
 
 .title-area {
@@ -131,7 +131,7 @@ export const InviteMessageContainer = styled.div`
       ". message-area ."
       ". button-area ."
       ". . ."; 
-    }
+    
 
     .title-area {
       
@@ -212,6 +212,7 @@ export const FormContainer = styled.form`
         color: #AEB3B7;
       }
   } 
+}
 `;
 
 export const FormTitle = styled.div`
@@ -257,6 +258,7 @@ export const CloseFormBtn = styled.button`
     cursor: pointer;
     &:focus {
         outline: none;
+    }
 `;
 
 export const SendInviteBtn = styled.button`
